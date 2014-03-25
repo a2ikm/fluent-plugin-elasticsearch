@@ -239,6 +239,7 @@ class ElasticsearchOutput < Test::Unit::TestCase
   def test_adds_timestamp_with_specified_field_when_configured_for_logstash
     driver.configure("logstash_format true\n")
     driver.configure("timestamp_key time\n")
+    stub_elastic_ping
     stub_elastic
     ts = DateTime.now.to_s
     driver.emit(sample_record)
@@ -251,6 +252,7 @@ class ElasticsearchOutput < Test::Unit::TestCase
   def test_adds_timestamp_to_specified_field_when_configured_not_for_logstash
     driver.configure("add_timestamp true\n")
     driver.configure("timestamp_key time\n")
+    stub_elastic_ping
     stub_elastic
     ts = DateTime.now.to_s
     driver.emit(sample_record)
